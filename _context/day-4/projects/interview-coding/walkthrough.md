@@ -1,0 +1,138 @@
+# How we built this — a walkthrough
+
+A record of the conversation steps that produced the artifacts in this folder ([claude-thoughts.md](claude-thoughts.md), [inputs/](inputs/), and [PLAN.md](PLAN.md)). For Mary and other workshop participants who want to see the *process* of using Claude Code for this kind of project, not just the final outputs.
+
+The whole sequence took one conversation, about an hour of back-and-forth, five prompts.
+
+---
+
+## Step 1 — Brief Claude on the domain
+
+> Can you read this PDF and keep it in context: `/Users/mk/Desktop/deterding-waters-2018-flexible-coding-of-in-depth-interviews-a-twenty-first-century-approach.pdf`. Then help me think of a whole bunch of ways to make use of LLMs and Claude Code in particular for disciplinary work of this sort — either testing new coding systems against grounded, or scaling up new coding systems, maybe even getting to something that has some of the supposed benefits of grounded while aligning with Waters. Mary is at our workshop so we want to think of things that really align with her views and approach.
+
+**What happened:** Claude read all 32 pages of the Deterding & Waters paper, then produced a brainstorm of ~30 LLM use cases organized around Waters' three-stage workflow (indexing → analytic coding → validation). The brainstorm explicitly flagged moves to *avoid* in front of Mary — for instance, never pitch LLMs as "discovering themes," because that's the "epistemological fairytale" the paper argues against.
+
+**The move worth noticing:** giving Claude a single dense methodological source — *and* naming the human in the room whose views matter — produces far more aligned output than a generic "help me think about qualitative coding." The paper acts as a constraint; Mary's presence acts as a second constraint.
+
+---
+
+## Step 2 — Capture the thinking in a document
+
+> Can you put all of these in a claude-thoughts doc so I can read more easily?
+
+**What happened:** Claude wrote [claude-thoughts.md](claude-thoughts.md) with the full brainstorm, organized into sections A through H — covering testing coding systems against ground, scaling up coding, hybrid grounded-but-Waters-epistemology moves, transparency and methods reporting, secondary analysis, team workflows, Claude Code–specific affordances, and a section H listing things to flag *against* in front of Mary.
+
+**The move worth noticing:** brainstorming in chat is fast, but chat scrolls away. Asking Claude to commit the thinking to a markdown file turns it into a durable artifact that future Claude sessions can read — and that you can share with collaborators.
+
+---
+
+## Step 3 — Drill into a specific affordance (skills)
+
+> Can you also think of Claude SKILL.md files that would be useful? Today we are talking about skills and MCPs, so I'm wondering what could help someone like Mary do her research.
+
+**What happened:** Claude added Sections I (skills catalog) and J (MCP candidates) to the same doc. About twenty candidate skills, each tied back to a specific page or move in the paper — `/index-transcript` for Stage 1, `/find-negative-cases` for the Katz/Luker/Blee rigor requirement on p. 731, `/methods-paragraph` to address the opaque-methods complaint on p. 718, and so on. Closed with a recommended three-skill demo trio.
+
+**The move worth noticing:** once you have a brainstorm, ask Claude to *zoom in* on a specific category and reapply the same alignment constraints. Each skill ties back to a citation, which makes the recommendations defensible rather than vibes.
+
+---
+
+## Step 4 — Build a sample corpus
+
+> Can you also generate some sample transcripts, or find some online?
+
+**What happened:** Claude explained why generating is better than finding (real transcripts are IRB-restricted or in gated archives, and the public ones are stripped of conversational texture), then produced four synthetic transcripts modeled on Deterding's actual published study of low-income mothers planning their kids' college paths. Each transcript was designed to showcase a specific demo move:
+
+- [R001 Tasha](inputs/transcripts/R001-Transcript.md) — textbook instrumental
+- [R002 Marisol](inputs/transcripts/R002-Transcript.md) — textbook expressive
+- [R003 Carla](inputs/transcripts/R003-Transcript.md) — mixed, self-aware about the tension
+- [R004 Denise](inputs/transcripts/R004-Transcript.md) — instrumental reasoning dressed in emotional/family language. Designed to trip up a naive coder — the construct-validity stress test
+
+Plus [protocol.md](inputs/protocol.md) (the interview guide), [attributes.csv](inputs/attributes.csv) (the demographic spreadsheet), and a [README](inputs/README.md) documenting design choices.
+
+**The move worth noticing:** for a methods demo, synthetic data designed to surface specific challenges is more useful than real data. Claude can generate transcripts at the right length for live workshop reading and engineer specific edge cases — like Denise — that let you show what a skill is actually doing.
+
+---
+
+## Step 5 — Convert the brainstorm into a parallelizable plan
+
+> Also add the three skill ideas to PLAN.md so I can get different Claudes working in parallel.
+
+**What happened:** Claude wrote [PLAN.md](PLAN.md) as three self-contained task sections, each copy-pasteable into a fresh Claude session. Shared context up top (required reading, hard constraints, output conventions). Each task spells out the skill's behavior, what good output looks like, what to avoid, where to build, and how to validate.
+
+**The move worth noticing:** the hand-off from "Claude brainstorms" to "Claude builds" benefits from explicit constraints and validation steps. Without them, each parallel session would drift in a different direction. With them, three Claudes building three skills in parallel will produce work that fits together.
+
+---
+
+## Step 6 — Run three Claudes in parallel
+
+> Now give me the prompts I should run in parallel in different Claudes to get the skills built.
+
+**What happened:** Claude produced three self-contained prompts, one per skill, each ~200 words. The prompts assume a fresh Claude Code session started in this folder and tell each parallel session what to read, where to build, how to validate, and what to report back.
+
+**The move worth noticing:** the prompts deliberately do *not* repeat what's already in PLAN.md. They point at it. The plan is the durable artifact; the prompts are the trigger. If the plan changes, the prompts still work.
+
+### How to run
+
+Open three terminal windows. In each one, `cd` into `_context/day-4/projects/interview-coding/` and start a fresh Claude Code session. Paste one of the prompts below as the first message in each session.
+
+The three are independent — no shared writes — so they can all run at once. Task 3 (`/methods-paragraph`) doesn't depend on the others' outputs existing during its own build; it just needs to gracefully report what *is* and *isn't* there.
+
+### Session 1 — build `/index-transcript`
+
+```text
+You're going to build a Claude Code skill called /index-transcript for a workshop demo of LLM-assisted qualitative coding.
+
+1. Read PLAN.md in this folder. Read the "Shared context" section AND "Task 1 — Build /index-transcript". Follow the required-reading list in the shared context before writing any code.
+
+2. Build the skill at .claude/skills/index-transcript/ — at minimum a SKILL.md, plus whatever supporting files you need.
+
+3. Validate it by running it against all four transcripts in inputs/transcripts/. Save the worked outputs to .claude/skills/index-transcript/examples/.
+
+4. When you're done, give me a short report: what's in SKILL.md, what examples you produced, and any decisions you made that PLAN.md didn't fully specify.
+
+Stay aligned with the constraints in PLAN.md — especially: no analytic codes at this stage, no summarizing, no emojis. This is Waters' Stage 1: navigation layer, not digest.
+```
+
+### Session 2 — build `/find-negative-cases`
+
+```text
+You're going to build a Claude Code skill called /find-negative-cases for a workshop demo of LLM-assisted qualitative coding.
+
+1. Read PLAN.md in this folder. Read the "Shared context" section AND "Task 2 — Build /find-negative-cases". Follow the required-reading list in the shared context before writing any code.
+
+2. Build the skill at .claude/skills/find-negative-cases/ — at minimum a SKILL.md, plus whatever supporting files you need.
+
+3. Validate it on both demo claims listed in PLAN.md's Task 2. Save the worked memos to .claude/skills/find-negative-cases/examples/. For the first claim — "instrumental mothers reject family/emotional framing of college" — confirm that R004 (Denise) surfaces as the negative case with verbatim excerpts and a clear reasoning paragraph.
+
+4. When you're done, give me a short report: what's in SKILL.md, what examples you produced, and any decisions you made.
+
+Stay aligned with the constraints in PLAN.md — especially: verbatim quotes only, don't dismiss negative cases, don't stop after one.
+```
+
+### Session 3 — build `/methods-paragraph`
+
+```text
+You're going to build a Claude Code skill called /methods-paragraph for a workshop demo of LLM-assisted qualitative coding.
+
+1. Read PLAN.md in this folder. Read the "Shared context" section AND "Task 3 — Build /methods-paragraph". Follow the required-reading list in the shared context before writing any code.
+
+2. Build the skill at .claude/skills/methods-paragraph/ — at minimum a SKILL.md, plus whatever supporting files you need.
+
+3. Validate it. The other two skills are being built in parallel sessions, so their outputs may not exist yet when you validate. Design the skill to inspect the project state and accurately report what's there — including reporting "no indexing done yet" or "no negative-case analysis run yet" if those outputs are absent. Save examples/methods-paragraph-empty.md showing the empty-project behavior. If the other skills' outputs exist by the time you validate, also produce examples/methods-paragraph-full.md.
+
+4. When you're done, give me a short report: what's in SKILL.md, what examples you produced, and any decisions you made.
+
+Stay aligned with the constraints in PLAN.md — especially: don't invent details the project state doesn't support, don't gesture at grounded theory, be specific about what was and wasn't done.
+```
+
+### After all three return
+
+Run the demo sequence on the corpus: `/index-transcript` across all four transcripts, then `/find-negative-cases` on the demo claim about instrumental mothers, then `/methods-paragraph` against the project state. That order — scaling, rigor, transparency — is a direct response to the three main complaints in Deterding & Waters' paper.
+
+---
+
+## A note on prompting
+
+Each of the five prompts above is short. None of them tells Claude exactly what to write. They give it a goal, one or two alignment constraints (align with Mary's view; put it in a doc; make it parallelizable), and trust it to produce the artifact.
+
+That delegation is the part that's hard to demonstrate in a slide. The way you learn it is by trying it, looking at what Claude produces, and adjusting the next prompt. Today's session is that loop.

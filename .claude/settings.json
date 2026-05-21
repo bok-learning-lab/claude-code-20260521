@@ -5,7 +5,9 @@
       "Read(//Users/mk/Desktop/**)",
       "Bash(git reset *)",
       "Bash(git rm *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "WebFetch(domain:phet.colorado.edu)",
+      "WebSearch"
     ]
   }
 }
