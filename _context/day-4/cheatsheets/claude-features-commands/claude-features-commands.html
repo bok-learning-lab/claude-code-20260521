@@ -177,72 +177,53 @@
 <div class="page">
 
   <header>
-    <h1>Claude Code Cheatsheet</h1>
-    <p>Vocabulary, commands, and keyboard shortcuts worth committing to muscle memory. Most of the friction new users hit comes from not knowing a command already exists for what they are trying to do — a quick scan here before reaching for a workaround usually pays off.</p>
+    <h1>Claude Code: Features and Commands</h1>
+    <p>Claude Code is more than a chat window — it is a system with distinct features that each do a different kind of work. Understanding what those features are (and how to reach them) is what separates users who feel like they are fighting the tool from users who feel like they are extending it.</p>
   </header>
 
-  <!-- GLOSSARY -->
+  <!-- FEATURES INTRO -->
   <section>
-    <h2>Glossary</h2>
+    <h2>The Core Features</h2>
     <table>
       <thead>
-        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><th>Feature</th><th>What it is</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td>Session</td>
-          <td>One run of <code>claude</code> in a directory, from launch to exit. Each session has its own conversation history, while project memory (CLAUDE.md) persists across sessions.</td>
+          <td>The model</td>
+          <td>The AI that reads your prompts, reasons about them, and generates responses. This is what you are talking to directly.</td>
         </tr>
         <tr>
-          <td>Context window</td>
-          <td>The total amount of text — your prompts, Claude's replies, and any files it has read — that the model can hold in mind at once. When it fills up, older content is compacted or dropped. Managed with <code>/clear</code> and <code>/compact</code>.</td>
+          <td>Tools</td>
+          <td>Capabilities the model can invoke mid-response: reading files, editing code, running shell commands, searching the web. Each tool call appears in the transcript so you can see exactly what happened.</td>
         </tr>
         <tr>
-          <td>Token</td>
-          <td>The unit models use to measure text (roughly 3/4 of a word). Usage limits and API billing are counted in tokens. You will mostly encounter this via <code>/cost</code> or the context indicator.</td>
+          <td>Context management</td>
+          <td>The session, the context window, memory (CLAUDE.md), and compaction. Everything the model "knows" during a session passes through here.</td>
         </tr>
         <tr>
-          <td>CLAUDE.md</td>
-          <td>A markdown file (project root, home directory, or subfolder) that Claude reads automatically at the start of every session. It holds your project's conventions, commands, and constraints so you do not have to repeat them.</td>
-        </tr>
-        <tr>
-          <td>Plan mode</td>
-          <td>A read-only mode in which Claude explores, explains, and proposes but will not edit files or run commands. Use it to review an approach before letting Claude execute. Toggle with Shift+Tab or enter directly with <code>/plan</code>.</td>
-        </tr>
-        <tr>
-          <td>Accept Edits mode</td>
-          <td>A mode that auto-approves file edits for the rest of the session, while other actions such as shell commands still prompt for approval. Useful once you trust the direction of the work. Toggle with Shift+Tab.</td>
-        </tr>
-        <tr>
-          <td>Permissions</td>
-          <td>The rules governing which actions Claude can take without asking. By default it asks for everything that touches your machine. Adjust per project with <code>/permissions</code> or in settings.</td>
-        </tr>
-        <tr>
-          <td>Tool</td>
-          <td>A capability Claude can invoke, such as reading a file, editing, running bash, or searching the web. Each tool call appears in the transcript so you can see exactly what happened.</td>
+          <td>Permissions and modes</td>
+          <td>Rules governing what Claude can do without asking. Plan mode (read-only), Accept Edits mode (auto-approve file edits), and per-project permission settings all live here.</td>
         </tr>
         <tr>
           <td>MCP</td>
-          <td>Model Context Protocol — an open standard for plugging external systems (GitHub, Jira, databases, internal APIs) into Claude as tools. If your team has MCP servers configured, Claude can query and act on those systems directly.</td>
+          <td>Model Context Protocol — an open standard for connecting external systems (GitHub, Jira, databases, internal APIs) as tools Claude can call directly.</td>
         </tr>
         <tr>
-          <td>Subagent</td>
-          <td>A secondary Claude instance the main session can spawn to handle a focused subtask — running tests, searching a large codebase, reviewing code — in its own context window before reporting back. Configured via <code>/agents</code>.</td>
+          <td>Agents and subagents</td>
+          <td>The ability to spawn secondary Claude instances to handle focused subtasks — running tests, searching a large codebase, reviewing code — in their own context windows, then report back.</td>
         </tr>
         <tr>
-          <td>Hook</td>
-          <td>A shell command that runs automatically at a defined point in Claude's lifecycle, such as before a tool runs, after an edit, or on session start. Commonly used for auto-formatting, linting, or blocking unsafe commands.</td>
+          <td>Hooks</td>
+          <td>Shell commands that fire automatically at defined points in Claude's lifecycle: before a tool runs, after an edit, on session start. Used for formatting, linting, or blocking unsafe actions.</td>
         </tr>
         <tr>
-          <td>Skill</td>
-          <td>A packaged set of instructions and helper files that teaches Claude a specific workflow. Skills are invoked with <code>/</code> like built-in commands and can also load automatically when relevant.</td>
-        </tr>
-        <tr>
-          <td>Command</td>
-          <td>Any input starting with <code>/</code>. Built-in commands control the session; custom ones are skills your team defines in <code>.claude/skills/&lt;name&gt;/SKILL.md</code>.</td>
+          <td>Skills</td>
+          <td>Packaged instructions (and optionally scripts) that teach Claude a specific repeatable workflow. Defined in <code>.claude/skills/&lt;name&gt;/SKILL.md</code> and invoked with <code>/</code>.</td>
         </tr>
       </tbody>
     </table>
+    <div class="callout" style="margin-top:1rem;">Slash commands are the interface to all of this. Type <code>/</code> on an empty prompt and you get a menu of everything reachable — built-in session controls, bundled skills, custom skills your project defines, and tools from connected MCP servers.</div>
   </section>
 
   <!-- BIG THREE — before the full commands list -->
