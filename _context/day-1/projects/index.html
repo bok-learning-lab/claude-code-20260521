@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — inputs → operations → outputs</title>
+<style>
+  :root{
+    --bg:#fbfaf8;--surface:#ffffff;--text:#23201c;--muted:#6b645b;
+    --accent:#b85c38;--accent-soft:#f3e7e0;--border:#e7e2da;--maxw:54rem;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:2.5rem 1.25rem 5rem;}
+  .wrap{max-width:var(--maxw);margin:0 auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:14px;
+    padding:2.75rem clamp(1.25rem,4vw,3rem);
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.04);}
+  h1{font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.15;margin:0 0 .5rem;letter-spacing:-.02em;}
+  .lede{color:var(--muted);font-size:1.05rem;margin:.25rem 0 1.75rem;}
+  h2{font-size:1.2rem;margin:2.5rem 0 .75rem;padding-top:1.5rem;
+    border-top:1px solid var(--border);letter-spacing:-.01em;}
+  h1+h2,.lede+h2{border-top:none;padding-top:0;}
+  p{margin:1rem 0;}
+  a{color:var(--accent);text-decoration-color:var(--accent-soft);text-underline-offset:2px;}
+  a:hover{text-decoration-color:var(--accent);}
+  code{font:.875em/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+    background:var(--accent-soft);padding:.15em .4em;border-radius:5px;}
+  .flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+    background:var(--accent-soft);border-left:4px solid var(--accent);
+    border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.25rem 0 .5rem;
+    font-size:1.02rem;}
+  .flow b{font-weight:600;}
+  .flow .arrow{color:var(--accent);font-weight:700;}
+  .grid{display:grid;gap:1rem;margin:1.5rem 0;}
+  .card{border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem;
+    background:var(--surface);transition:border-color .15s,transform .15s;}
+  .card:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .card h3{margin:0 0 .35rem;font-size:1.08rem;}
+  .num{display:inline-block;min-width:2.1em;color:var(--accent);font-weight:700;}
+  .card .io{font-size:.93rem;color:var(--muted);margin:.35rem 0 .55rem;}
+  .card .io .arrow{color:var(--accent);padding:0 .3em;}
+  .card .blurb{font-size:.92rem;margin:.55rem 0 .7rem;}
+  .card .links{font-size:.93rem;}
+  .card .links a{margin-right:1rem;white-space:nowrap;}
+  .pill{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--muted);border:1px solid var(--border);border-radius:999px;
+    padding:.1rem .55rem;margin-left:.5rem;vertical-align:.12em;}
+  footer{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);
+    font-size:.92rem;color:var(--muted);}
+  @media (max-width:540px){
+    body{padding:1.25rem .75rem 3rem;}
+    .wrap{padding:1.5rem 1.25rem;border-radius:10px;}
+    .card .links a{display:block;margin:.3rem 0;}
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#1a1816;--surface:#242019;--text:#ece7df;--muted:#a89f92;
+      --accent:#e08a5f;--accent-soft:#3a2d24;--border:#38322a;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Workshop Projects</h1>
+  <p class="lede">Seven small projects, all built on the same shape: raw material in, a
+  defined operation in the middle, a finished artifact out.</p>
+
+  <h2>The pattern: inputs → operations → outputs</h2>
+  <div class="flow">
+    <b>inputs/</b><span class="arrow">→</span>
+    <b>operations-tools-commands/</b><span class="arrow">→</span>
+    <b>outputs/</b>
+  </div>
+  <p>Every folder here repeats one structure. <code>inputs/</code> holds the raw
+  material you start with — a dataset, a stack of papers, a transcript, a
+  syllabus. <code>operations-tools-commands/</code> holds the <em>operation</em>:
+  the <a href="07_summary_of_day_1/outputs/glossary-html/prompt.html">prompt</a>,
+  script, or command that transforms the input — and often a
+  <a href="07_summary_of_day_1/outputs/glossary-html/claude-md.html"><code>CLAUDE.md</code></a>
+  that tells <a href="07_summary_of_day_1/outputs/glossary-html/claude-code.html">Claude
+  Code</a> how to do the work. <code>outputs/</code> holds the
+  <a href="07_summary_of_day_1/outputs/glossary-html/artifact.html">artifact</a>
+  that comes out the other end.</p>
+  <p>The point of separating these is repeatability. When the operation is written
+  down rather than improvised in a chat, you can rerun it on new inputs, hand it
+  to someone else, or change one stage without disturbing the others. That
+  discipline — deciding deliberately what goes into the work — is
+  <a href="07_summary_of_day_1/outputs/glossary-html/context-engineering.html">context
+  engineering</a>, and it is the single habit these projects are meant to teach.</p>
+
+  <h2>Why so many outputs are HTML</h2>
+  <p>Several projects end in an <code>.html</code> file rather than a plain
+  document, and that choice is deliberate.
+  <a href="07_summary_of_day_1/outputs/glossary-html/markdown.html">Markdown</a> is
+  perfect when the result is text to read.
+  <a href="07_summary_of_day_1/outputs/glossary-html/html.html">HTML</a> is the
+  right output when the result needs <strong>visual structure</strong> (cards,
+  tables, side-by-side columns, a styled index), <strong>interaction</strong>
+  (links between pages, filters, a live chart you can manipulate), and to be
+  <strong>self-contained and shareable</strong> — an <code>.html</code> file opens
+  in any browser with no install, so you can email it to a colleague or hand it to
+  students as-is.</p>
+  <p>You don't write the HTML by hand. You describe what the reader should be able
+  to see and do, and the
+  <a href="07_summary_of_day_1/outputs/glossary-html/harness.html">harness</a>
+  produces the files. It widens what an artifact can be: not a flat document, but
+  a small, styled, navigable thing — which is exactly what the population pyramids,
+  the recipe site, the research summaries, and the glossary below are.</p>
+
+  <h2>The projects</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3><span class="num">01</span> Close Reading</h3>
+      <div class="io">Shakespeare's complete works <span class="arrow">→</span> close-reading prompt <span class="arrow">→</span> an analytical essay</div>
+      <p class="blurb">The input is a large literary corpus: the complete works of Shakespeare as plain text. The operation applies a close-reading prompt that directs Claude to do sustained, evidence-cited analysis of a chosen passage rather than a summary. The output is a single long-form analytical essay in Markdown.</p>
+      <div class="links"><a href="01_close-reading/outputs/close-reading-output.md">close-reading-output.md</a> <span class="pill">markdown</span></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">02</span> Population Pyramids</h3>
+      <div class="io">UN WPP 2024 population CSVs <span class="arrow">→</span> charting prompt <span class="arrow">→</span> interactive demographic charts</div>
+      <p class="blurb">The input is structured tabular data — UN World Population Prospects 2024 CSVs of population by country, age, and sex. A charting prompt turns the raw numbers into a small program that reads the data and renders an age–sex pyramid comparing two countries. The output is a pair of self-contained, interactive HTML charts you manipulate in the browser.</p>
+      <div class="links">
+        <a href="02_population-pyramids/outputs/japan_nigeria_demographics_1.html">chart 1</a>
+        <a href="02_population-pyramids/outputs/japan_nigeria_demographics_2.html">chart 2</a>
+        <span class="pill">html · no index</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">03</span> Recipes</h3>
+      <div class="io">Family recipes <span class="arrow">→</span> formatting prompt <span class="arrow">→</span> a browsable recipe site</div>
+      <p class="blurb">The input is a set of informal family recipes in mixed, inconsistent plain text. A formatting prompt normalizes each one into a consistent structure — ingredients, steps, yield — and styles the collection as a set. The output is a browsable HTML site with an index page linking every recipe.</p>
+      <div class="links"><a href="03_recipes/outputs/index.html">index.html</a> <span class="pill">html site</span></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">04</span> Class Schedule Conflict</h3>
+      <div class="io">GENED 1104 schedule + syllabus <span class="arrow">→</span> conflict-resolution prompt <span class="arrow">→</span> a revised schedule</div>
+      <p class="blurb">The input is two course documents — the GENED 1104 schedule and syllabus — that contain a scheduling clash. The operation reasons over both to locate the conflict and propose a minimally disruptive fix that respects topic order and assessment dates. The output is a revised schedule in Markdown.</p>
+      <div class="links"><a href="04_class-schedule-conflict/outputs/revised-schedule.md">revised-schedule.md</a> <span class="pill">markdown</span></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">05</span> Makeup Exams</h3>
+      <div class="io">Syllabus + past Midterm 2 materials <span class="arrow">→</span> exam-generation prompt <span class="arrow">→</span> a new exam + answer key</div>
+      <p class="blurb">The input is course material: the syllabus plus several years of past Midterm 2 exams and answer keys. An exam-generation prompt calibrates difficulty and format to the originals and writes new, non-duplicated questions in a pass kept separate from the key. The output is two Markdown files — a fresh makeup exam and its complete answer key with grading rubrics.</p>
+      <div class="links">
+        <a href="05_makeup-exams/outputs/makeup-exam.md">makeup-exam.md</a>
+        <a href="05_makeup-exams/outputs/answer-key.md">answer-key.md</a>
+        <span class="pill">markdown</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">06</span> Research Helper</h3>
+      <div class="io">arXiv long-context papers <span class="arrow">→</span> summary prompt <span class="arrow">→</span> structured research summaries</div>
+      <p class="blurb">The input is a set of arXiv long-context research papers (PDFs plus one markdown extract). A summary prompt produces a faithful neutral summary of each, then adds an honest "twist" connecting the findings to teaching and research with LLM harnesses. The output is an HTML site — one structured summary per paper plus an index, with key figures embedded for the Context Rot report.</p>
+      <div class="links"><a href="06_research_helper/outputs/index.html">index.html</a> <span class="pill">html site</span></div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">07</span> Summary of Day 1</h3>
+      <div class="io">Video + transcript <span class="arrow">→</span> transcribe + still-grab scripts <span class="arrow">→</span> step handouts + a jargon glossary</div>
+      <p class="blurb">The input is the recording of the first workshop session — the video and its diarized, time-stamped transcript. Transcription and still-grab scripts plus a doc-writing prompt reorganize the live session into step-by-step instructions and define the vocabulary that was new to participants. The output is an HTML resource set: two setup handouts and a linked jargon glossary.</p>
+      <div class="links">
+        <a href="07_summary_of_day_1/outputs/index.html">index.html</a>
+        <span class="pill">html site</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Each project also has a <code>CLAUDE.md</code> (where present) describing how to
+    work in it. New to the vocabulary? Start at the
+    <a href="07_summary_of_day_1/outputs/glossary-html/index.html">glossary</a>.
+  </footer>
+
+</div>
+</body>
+</html>

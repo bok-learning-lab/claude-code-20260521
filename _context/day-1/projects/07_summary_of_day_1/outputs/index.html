@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 1 — Resources</title>
+<style>
+  :root{--bg:#fbfaf8;--surface:#fff;--text:#23201c;--muted:#6b645b;
+    --accent:#b85c38;--accent-soft:#f3e7e0;--border:#e7e2da;--maxw:48rem;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:2.5rem 1.25rem 5rem;}
+  .entry{max-width:var(--maxw);margin:0 auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:14px;
+    padding:2.5rem clamp(1.25rem,4vw,3rem);
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.04);}
+  .topnav{margin-bottom:1.75rem;font-size:.9rem;}
+  .topnav a{color:var(--muted);text-decoration:none;font-weight:500;}
+  .topnav a:hover{color:var(--accent);}
+  h1{font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.15;margin:0 0 .5rem;letter-spacing:-.02em;}
+  .lede{color:var(--muted);font-size:1.05rem;margin:.25rem 0 1.5rem;}
+  h2{font-size:1.2rem;margin:2.5rem 0 .75rem;padding-top:1.5rem;
+    border-top:1px solid var(--border);letter-spacing:-.01em;}
+  .lede+h2{border-top:none;padding-top:0;}
+  p{margin:1rem 0;}
+  a{color:var(--accent);text-decoration-color:var(--accent-soft);text-underline-offset:2px;}
+  a:hover{text-decoration-color:var(--accent);}
+  code{font:.875em/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+    background:var(--accent-soft);padding:.15em .4em;border-radius:5px;}
+  .flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;
+    background:var(--accent-soft);border-left:4px solid var(--accent);
+    border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.25rem 0;font-size:1.02rem;}
+  .flow .arrow{color:var(--accent);font-weight:700;}
+  .cards{display:grid;gap:1rem;margin:1.25rem 0;}
+  .card{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);
+    border-radius:12px;padding:1.1rem 1.3rem;background:var(--surface);
+    transition:border-color .15s,transform .15s;}
+  .card:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .card h3{margin:0 0 .3rem;font-size:1.08rem;color:var(--accent);}
+  .card p{margin:.3rem 0 0;font-size:.95rem;color:var(--muted);}
+  footer{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border);
+    font-size:.92rem;color:var(--muted);}
+  @media (max-width:540px){body{padding:1.25rem .75rem 3rem;}
+    .entry{padding:1.5rem 1.25rem;border-radius:10px;}}
+  @media (prefers-color-scheme:dark){:root{--bg:#1a1816;--surface:#242019;--text:#ece7df;
+    --muted:#a89f92;--accent:#e08a5f;--accent-soft:#3a2d24;--border:#38322a;}}
+</style>
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="../../index.html">&larr; All projects</a></nav>
+
+<h1>Day 1 — Resources</h1>
+<p class="lede">Turning the first workshop session into materials participants can
+actually keep.</p>
+
+<p>This project takes the <strong>recording of Day 1</strong> — the video and its
+diarized, time-stamped transcript — and turns a three-hour live session into a
+small set of durable <strong>resources</strong>: handouts that summarize the steps
+we covered, a distilled set of the instructors' pro-tips, and a glossary of the
+jargon and new terminology that came up. The aim
+is that someone who attended (or missed) the session can follow what we did without
+rewatching the video.</p>
+
+<div class="flow">
+  <span>video&nbsp;+&nbsp;transcript</span><span class="arrow">→</span>
+  <span>transcribe&nbsp;&amp;&nbsp;still-grab&nbsp;scripts</span><span class="arrow">→</span>
+  <span>handouts&nbsp;+&nbsp;glossary</span>
+</div>
+
+<p>The raw transcript lives in <code>inputs/</code>; the scripts and the
+doc-writing prompt that produced these resources live in
+<code>operations-tools-commands/</code>; everything below is the
+<code>outputs/</code>. The two setup guides reorganize the spoken session into
+do-this-next steps; the glossary defines every term that was new to participants,
+so a guide can link to a definition instead of re-explaining it.</p>
+
+<h2>Handouts — the steps we covered</h2>
+<div class="cards">
+  <a class="card" href="claude-ai-setup.html">
+    <h3>Claude.ai Setup Guide</h3>
+    <p>The browser interface on the HUIT plan: confirming your account, the
+    interface tour, models, memory, attachments, and a worked artifact example
+    (the interactive population pyramid).</p>
+  </a>
+  <a class="card" href="claude-cowork-setup.html">
+    <h3>Claude Co-Working Setup Guide</h3>
+    <p>Co-working as a workflow: the inputs → operation → outputs loop, writing
+    real prompts, and setting up a project that remembers context across
+    sessions.</p>
+  </a>
+</div>
+
+<h2>Pro-tips — how to think about the tools</h2>
+<div class="cards">
+  <a class="card" href="day-1-top-tips.html">
+    <h3>Top Tips for Using LLMs and Harnesses</h3>
+    <p>The guidance the instructors kept returning to — which surface to use
+    (claude.ai vs. Cowork vs. Code), write-the-code-instead, give-it-context,
+    the context window, new-chat hygiene, model choice, data sensitivity, and
+    keeping your judgment in the loop.</p>
+  </a>
+</div>
+
+<h2>Glossary — the new vocabulary</h2>
+<div class="cards">
+  <a class="card" href="glossary-html/index.html">
+    <h3>Workshop Glossary</h3>
+    <p>Plain-language definitions of every term that was new to participants —
+    Claude, model, context, context rot, prompt, artifact, HTML, harness, and
+    more — each a standalone page the handouts link into.</p>
+  </a>
+</div>
+
+<footer>
+  Source transcript: <code>inputs/20260518_audio_diarize.md</code> · Pipeline:
+  <code>operations-tools-commands/</code> (transcribe → still-grab → write guides).
+  The interface changes often, so the guides anchor on stable concepts rather than
+  exact button placement.
+</footer>
+</main>
+</body>
+</html>

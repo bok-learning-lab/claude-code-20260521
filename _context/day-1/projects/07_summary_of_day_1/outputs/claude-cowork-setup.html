@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Co-Working Setup Guide — Day 1</title>
+<style>
+  :root{--bg:#fbfaf8;--surface:#fff;--text:#23201c;--muted:#6b645b;
+    --accent:#b85c38;--accent-soft:#f3e7e0;--border:#e7e2da;--maxw:46rem;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:2.5rem 1.25rem 5rem;}
+  .entry{max-width:var(--maxw);margin:0 auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:14px;
+    padding:2.5rem clamp(1.25rem,4vw,3rem);
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.04);}
+  .topnav{margin-bottom:1.75rem;font-size:.9rem;}
+  .topnav a{color:var(--muted);text-decoration:none;font-weight:500;}
+  .topnav a:hover{color:var(--accent);}
+  h1{font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.15;margin:0 0 1.25rem;letter-spacing:-.02em;}
+  h2{font-size:1.2rem;margin:2.5rem 0 .75rem;padding-top:1.5rem;
+    border-top:1px solid var(--border);letter-spacing:-.01em;}
+  h1+p+h2{border-top:none;padding-top:0;}
+  h3{font-size:1.02rem;margin:1.75rem 0 .4rem;}
+  p{margin:1rem 0;}
+  a{color:var(--accent);text-decoration-color:var(--accent-soft);text-underline-offset:2px;}
+  a:hover{text-decoration-color:var(--accent);}
+  blockquote{margin:1.5rem 0;padding:1.1rem 1.4rem;background:var(--accent-soft);
+    border-left:4px solid var(--accent);border-radius:0 10px 10px 0;}
+  blockquote p{margin:.4rem 0;}
+  ul,ol{margin:1rem 0;padding-left:1.4rem;}
+  li{margin:.4rem 0;}
+  li::marker{color:var(--accent);}
+  code{font:.875em/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+    background:var(--accent-soft);padding:.15em .4em;border-radius:5px;}
+  pre{background:var(--accent-soft);border:1px solid var(--border);border-radius:10px;
+    padding:1rem 1.2rem;overflow:auto;margin:1.25rem 0;}
+  pre code{background:none;padding:0;font-size:.9rem;line-height:1.5;}
+  table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.95rem;}
+  th,td{text-align:left;padding:.65rem .85rem;border-bottom:1px solid var(--border);vertical-align:top;}
+  thead th{background:var(--accent-soft);font-weight:600;border-bottom:2px solid var(--accent);}
+  td:first-child{font-weight:500;white-space:nowrap;}
+  hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+  @media (max-width:540px){body{padding:1.25rem .75rem 3rem;}
+    .entry{padding:1.5rem 1.25rem;border-radius:10px;}td:first-child{white-space:normal;}}
+  @media (prefers-color-scheme:dark){:root{--bg:#1a1816;--surface:#242019;--text:#ece7df;
+    --muted:#a89f92;--accent:#e08a5f;--accent-soft:#3a2d24;--border:#38322a;}}
+</style>
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">&larr; Day 1 index</a></nav>
+
+<h1>Claude Co-Working Setup Guide</h1>
+<p>"Co-working with Claude" is a workflow — not a separate product. It's the
+practice of using Claude.ai as a collaborative partner across a sustained project,
+treating each session as a working session with a capable collaborator rather than
+a one-shot query tool.</p>
+
+<h2>The basic co-working workflow</h2>
+<pre><code>1. Gather your inputs (files, data, notes, questions)
+2. Open a Claude conversation
+3. Drop in your inputs
+4. Give Claude a specific task with a clear output format
+5. Review the output, redirect as needed
+6. Move the output somewhere useful (copy into a doc, save to a file, etc.)</code></pre>
+
+<h2>How yesterday's workshop was structured</h2>
+<p>Each project yesterday followed this pattern:</p>
+<table>
+  <thead><tr><th>Step</th><th>What we did</th></tr></thead>
+  <tbody>
+    <tr><td>Inputs</td><td>Gathered raw material (images, CSVs, texts, course documents)</td></tr>
+    <tr><td>Tools</td><td>Wrote or used a <a href="glossary-html/prompt.html">prompt</a> to specify the task</td></tr>
+    <tr><td>Outputs</td><td>Claude generated an <a href="glossary-html/artifact.html">artifact</a> (website, analysis, exam, reading)</td></tr>
+  </tbody>
+</table>
+<p>The <code>projects/</code> folder in this repo is the organized version of that
+workflow.</p>
+
+<h2>Best practices</h2>
+<h3>Write a real prompt, not a question</h3>
+<p>Instead of: <em>"Can you analyze this data?"</em><br>
+Try: <em>"Analyze this CSV and tell me which country comparisons would make the
+most visually striking population pyramids. Explain your choices."</em></p>
+<h3>Specify the output format</h3>
+<p>Claude will match whatever format you describe:</p>
+<ul>
+  <li><em>"Return a markdown table with columns: name | date | topic"</em></li>
+  <li><em>"Write this as a numbered list"</em></li>
+  <li><em>"Generate a standalone HTML file I can open in a browser"</em></li>
+</ul>
+<h3>Attach everything upfront</h3>
+<p>Drop all relevant files into the conversation before sending your first
+message. Claude can hold a lot of context; give it what it needs.</p>
+<h3>Treat Claude's first draft as a draft</h3>
+<p>The first output is a starting point. Follow up with corrections, additions, or
+redirections. The conversation is the tool.</p>
+
+<h2>Setting up for a new project</h2>
+<ol>
+  <li>In Claude.ai, click <strong>New Project</strong> in the sidebar</li>
+  <li>Give the project a name</li>
+  <li>Upload any reference documents that should persist across sessions
+  (syllabus, style guide, dataset)</li>
+  <li>Start your first conversation in the project</li>
+</ol>
+<p>Projects let Claude remember context from previous sessions — useful for
+anything that spans more than one sitting.</p>
+
+<h2>What lives in each project folder</h2>
+<pre><code>my-project/
+├── inputs/     ← Raw materials: images, data, texts, documents
+├── tools/      ← Prompts and instructions (markdown files)
+└── outputs/    ← Generated artifacts from Claude</code></pre>
+<p>Use the <code>my-project/</code> folder in this repo as your blank workspace
+for today.</p>
+
+<hr>
+<nav class="topnav"><a href="claude-ai-setup.html">&larr; Claude.ai setup guide</a> &nbsp;·&nbsp; <a href="index.html">Day 1 index &rarr;</a></nav>
+</main>
+</body>
+</html>

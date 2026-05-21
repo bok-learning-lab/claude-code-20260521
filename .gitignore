@@ -66,9 +66,12 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
-.env.*
+.env*
 !.env.example
+
+# MCP project config (real one holds secrets — keep .example committed)
+.mcp.json
+!.mcp.json.example
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -141,3 +144,50 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.eggs/
+build/
+develop-eggs/
+downloads/
+sdist/
+wheels/
+share/python-wheels/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Python tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# JetBrains / VS Code workspace files
+.idea/
+.vscode/

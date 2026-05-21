@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 1 — Top Tips for Using LLMs and Harnesses</title>
+<style>
+  :root{--bg:#fbfaf8;--surface:#fff;--text:#23201c;--muted:#6b645b;
+    --accent:#b85c38;--accent-soft:#f3e7e0;--border:#e7e2da;--maxw:46rem;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:2.5rem 1.25rem 5rem;}
+  .entry{max-width:var(--maxw);margin:0 auto;background:var(--surface);
+    border:1px solid var(--border);border-radius:14px;
+    padding:2.5rem clamp(1.25rem,4vw,3rem);
+    box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.04);}
+  .topnav{margin-bottom:1.75rem;font-size:.9rem;}
+  .topnav a{color:var(--muted);text-decoration:none;font-weight:500;}
+  .topnav a:hover{color:var(--accent);}
+  h1{font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.15;margin:0 0 1.25rem;letter-spacing:-.02em;}
+  h2{font-size:1.2rem;margin:2.5rem 0 .75rem;padding-top:1.5rem;
+    border-top:1px solid var(--border);letter-spacing:-.01em;}
+  h1+p+h2,h1+h2{border-top:none;padding-top:0;}
+  .num{color:var(--accent);font-weight:700;}
+  p{margin:1rem 0;}
+  a{color:var(--accent);text-decoration-color:var(--accent-soft);text-underline-offset:2px;}
+  a:hover{text-decoration-color:var(--accent);}
+  blockquote{margin:1.5rem 0;padding:1.1rem 1.4rem;background:var(--accent-soft);
+    border-left:4px solid var(--accent);border-radius:0 10px 10px 0;}
+  blockquote p{margin:.4rem 0;}
+  ul,ol{margin:1rem 0;padding-left:1.4rem;}
+  li{margin:.4rem 0;}
+  li::marker{color:var(--accent);}
+  code{font:.875em/1 "SF Mono",SFMono-Regular,ui-monospace,Menlo,Consolas,monospace;
+    background:var(--accent-soft);padding:.15em .4em;border-radius:5px;}
+  hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+  @media (max-width:540px){body{padding:1.25rem .75rem 3rem;}
+    .entry{padding:1.5rem 1.25rem;border-radius:10px;}}
+  @media (prefers-color-scheme:dark){:root{--bg:#1a1816;--surface:#242019;--text:#ece7df;
+    --muted:#a89f92;--accent:#e08a5f;--accent-soft:#3a2d24;--border:#38322a;}}
+</style>
+</head>
+<body>
+<main class="entry">
+<nav class="topnav"><a href="index.html">&larr; Day 1 index</a></nav>
+
+<h1>Day 1 — Top Tips for Using LLMs and Harnesses</h1>
+<p>The Day 1 walk-through teaches the <em>clicks</em>. This is the other half:
+the guidance the instructors kept returning to about <strong>how to think about
+these tools</strong> so you get good output instead of confident nonsense.
+These are the ideas worth carrying into every chat, Cowork task, and (later)
+Claude Code session.</p>
+
+<h2><span class="num">1.</span> Know which surface you're in: claude.ai vs. Cowork vs. Claude Code</h2>
+<p>These are three doors onto the <em>same</em> models. What differs is how much
+reach the model has into your machine — and therefore what it can do for you and
+what you have to be careful about. (This goes a little beyond what was said on
+Day 1, to give you the whole map.)</p>
+<ul>
+  <li><strong>claude.ai (browser / desktop chat).</strong> A conversation, plus
+  files you paste or upload, plus artifacts it generates. <strong>Nothing
+  touches your computer.</strong> Best for: thinking, drafting, a one-off
+  analysis, or producing a single self-contained artifact (a chart, a page, a
+  document) from data you hand it. Lowest setup, lowest risk. Ceiling: it can't
+  see or change your files — you copy context <em>in</em> and copy results
+  <em>out</em> by hand.</li>
+  <li><strong>Claude Cowork (desktop app, connected to a folder).</strong> The
+  same chat, but it can <strong>read and — with permission — change the files in
+  a folder you grant it.</strong> Best for: work that <em>is</em> your local
+  files — rename/transcribe/summarize a whole folder, generate many interlinked
+  outputs, iterate on real documents. The local-file access is the
+  game-changer; the cost is that you must be deliberate about <em>which</em>
+  folder and <em>what</em> permissions (see tips 10 and 11).</li>
+  <li><strong>Claude Code (terminal + editor).</strong> The harness with the
+  most control: it can run commands, follow repeatable multi-step workflows, and
+  use slash commands (<code>/compact</code>, <code>/context</code>), skills, and
+  agents. Best for: scale, automation, and repeatability — "once words can
+  <em>do things</em> in the world via the command line, it's game-changing."
+  Steeper entry (you work in a terminal) but the highest ceiling. This is
+  Day 2's focus.</li>
+</ul>
+<p><strong>Rule of thumb:</strong> start at claude.ai for thinking and one-offs;
+move to Cowork when the work <em>is</em> your local files; reach for Claude Code
+when you need scale, repeatability, or fine-grained control. Each step gives the
+model more reach into your machine — so it's a progression of <em>capability</em>
+and of <em>responsibility</em>. Match the surface to both the task and its
+risk.</p>
+
+<h2><span class="num">2.</span> Don't ask the model to <em>do</em> the hard thing — ask it to write the code that does it</h2>
+<p>The signature demo of the day: ask the model to multiply two large random
+numbers and it gets close but wrong (right number of digits, first few digits
+right, the rest invented). Ask it to <em>write a little Python script</em> to do
+the same multiplication and it's perfect, every time.</p>
+<p>Why: the model learned arithmetic as text patterns from the internet, so it
+<em>approximates</em>. But "write a function that multiplies two numbers" is the
+most practiced task on the internet — it never gets that wrong. <strong>Lean
+into what it's reliably great at (writing code) rather than asking it to
+one-shot something it's structurally bad at (precise computation).</strong> Code
+is also "how you take strings of words and do things in the world" — that's the
+multiplier.</p>
+
+<h2><span class="num">3.</span> Give it context — don't ask cold, "one-shot" questions</h2>
+<p>The Shakespeare close-reading demo: asked cold for a close reading of a
+scene, the model insists the scene doesn't exist and offers near-misses. Paste
+in the actual text and it does a credible reading. Same pattern as the
+multiplication: <strong>"When you just ask a question without context, it might
+go wrong. Give it the right context and the right tools, and it starts to go
+really, really right."</strong></p>
+
+<h2><span class="num">4.</span> The technology is powerful but <em>inhuman</em> — it's all just text and tokens</h2>
+<p>The recurring "beat" of the day. Words go in as strings of numbers (tokens,
+and the splits are weird and non-human), numbers come out. Memory,
+<code>/compact</code>, skills — none of it is magic; <strong>it's all just
+markdown text files being added to the conversation.</strong> The payoff of
+understanding this: you stop being surprised by hallucinations, and you realize
+<em>you</em> have control over those text documents.</p>
+
+<h2><span class="num">5.</span> Understand the context window — and that position matters</h2>
+<p>Everything lives in a context window (~200K tokens for most models, up to 1M
+for some — "the length of a novel"). Before you type anything it already holds
+the <strong>system prompt</strong> and your <strong>memory file</strong>, then
+your attached docs and query, then every exchange stacks on top until it's full
+and gets summarized ("every new thread is a new day" — the <em>Memento</em>
+analogy).</p>
+<p>The pro-tip inside this: <strong>not all context is equal.</strong> The
+beginning (system prompt, memory, initial query/docs) and the <em>most
+recent</em> thing you said carry the most weight; material in the middle of a
+long context gets lost ("context rot" / "lost in the middle"). So put what
+matters most at the start or say it again at the end.</p>
+
+<h2><span class="num">6.</span> Start a new chat / new task whenever you switch tasks</h2>
+<p>Leftover conversation is silently passed as context and <em>misleads</em> the
+model — if you were doing math and then ask it to write an email, the math is
+still in there shaping the answer. <strong>"New chat / new task is the cleanest
+way to keep your context tidy."</strong> Cheap habit, big quality
+difference.</p>
+
+<h2><span class="num">7.</span> Actively manage the context — compact, fork, and watch usage</h2>
+<p>When a conversation goes down the wrong path or gets long, you don't have to
+start from zero: <code>/compact</code> crushes the history into a summary and
+continues; you can fork a conversation; <code>/context</code> shows you exactly
+how many tokens the system prompt, tools, and messages are eating. Knowing
+"what's going on under the hood" is what lets you steer instead of just
+hoping.</p>
+
+<h2><span class="num">8.</span> Pick the model to match the job</h2>
+<p>Opus 4.7 is the strongest but burns credits fastest. Use <strong>Sonnet/Haiku
+for light or simple questions</strong>, and <strong>bump up to Opus for heavy
+research, complex reasoning, or code that has to be right.</strong> Start low,
+escalate when you hit a wall. You can switch mid-conversation.</p>
+
+<h2><span class="num">9.</span> Mind data sensitivity — this plan is "at your own risk" for now</h2>
+<blockquote>
+  <p>The HUIT bridge plan has <strong>no Harvard data agreement yet</strong>.
+  Only put in data you're comfortable sharing — public material and the workshop
+  sample files are fine; <strong>student work and research data wait until the
+  Anthropic Enterprise agreement is in place.</strong> The memory toggle carries
+  the same caveat: useful, but you decide what Claude gets to remember about
+  you.</p>
+</blockquote>
+
+<h2><span class="num">10.</span> Be deliberate about what folders you give Cowork</h2>
+<p>Cowork can read — and, with permission, <em>change</em> — every file in a
+folder you connect. The classic "watch it tidy my Downloads folder" demo is
+genuinely dangerous if that folder holds research data, taxes, or anything
+sensitive. <strong>Create a dedicated project folder (or link the one we
+provided) rather than pointing it at Downloads/Screenshots</strong>, and grant
+write permission consciously.</p>
+
+<h2><span class="num">11.</span> Use exact file paths for reliable local work</h2>
+<p>When you want Claude to act on a specific file or folder, give it the full
+path (Mac: option-click → <em>Copy as Pathname</em>; or drag the file in). A
+path is "like a URL — a unique identifier for that resource," so the model acts
+on <em>exactly</em> what you mean instead of guessing.</p>
+
+<h2><span class="num">12.</span> Iterate by just telling Claude what's wrong</h2>
+<p>Artifacts and outputs are conversational. "If there's anything you don't like
+about the visualization, just tell Claude." Don't restart from scratch to fix
+one thing — describe the change and let it revise.</p>
+
+<h2><span class="num">13.</span> Keep your judgment in the loop — the model extends you, it doesn't replace you</h2>
+<p>The honest framing from the instructors: an LLM summary of 30 papers isn't as
+good as reading them yourself — but you'd never read all 30 otherwise, so it's
+"at least a little better than nothing." The mental model to carry forward:
+<strong>bring in context → manipulate it with the LLM → produce outputs, and
+chain those operations</strong> — with you making the decisions at each fork.
+That's where your agency, and the value of understanding the mechanism,
+lives.</p>
+
+<hr>
+<p style="font-size:.92rem;color:var(--muted);">Drawn from the Day 1 transcript
+(<code>inputs/20260518_audio_diarize.md</code>), with tip 1 expanded a little
+beyond the session to give the full picture. Companion to the
+<a href="claude-ai-setup.html">Claude.ai</a> and
+<a href="claude-cowork-setup.html">Cowork</a> setup guides.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mdls -name kMDItemNumberOfPages \"/Users/mk/Desktop/deterding-waters-2018-flexible-coding-of-in-depth-interviews-a-twenty-first-century-approach.pdf\")",
+      "Read(//Users/mk/Desktop/**)"
+    ]
+  }
+}
