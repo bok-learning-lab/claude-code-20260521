@@ -20,7 +20,7 @@ Each project is documented in three short essays:
 
 Mary Waters' "flexible coding" approach to qualitative interview research, scaled with Claude Code skills that index transcripts to a protocol, surface negative cases against a working claim, and generate transparent methods paragraphs. Built around the framework set out in Deterding & Waters (2018, *Sociological Methods & Research*). Mary Waters is herself a workshop participant; the design choices align with her methodological view rather than with grounded theory.
 
-[Summary](interview-coding/summary.md) · [Tradition](interview-coding/tradition.md) · [Affordance](interview-coding/affordance.md)
+[Summary](interview-coding/summary.md) · [Tradition](interview-coding/tradition.md) · [Affordance](interview-coding/affordance.md) · [How we built it](interview-coding/walkthrough.md)
 
 ### [Physics interactives](physics-interactives/summary.md)
 

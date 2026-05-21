@@ -19,7 +19,7 @@ Hard constraints:
 
 The user supplies a path to a `.md` file. If they don't, ask. Treat anything else as a parameter:
 
-- **Author name** — defaults to `Marlon Kuzmick`. Override if asked.
+- **Author name** — defaults to `Bok Center`. Override if asked.
 - **Output path** — defaults to `<source-dir>/<basename>.html`. Override if asked.
 
 ## Assets
@@ -84,7 +84,7 @@ Load `assets/essay-style.css` and `assets/template.html`. Substitute:
 | Placeholder | Value |
 |---|---|
 | `{{TITLE}}` | The extracted title, HTML-escaped. |
-| `{{AUTHOR}}` | Author name (default `Marlon Kuzmick`). |
+| `{{AUTHOR}}` | Author name (default `Bok Center`). |
 | `{{STYLES}}` | Full contents of `assets/essay-style.css`, inlined unchanged. |
 | `{{SUBTITLE_BLOCK}}` | `      <p class="subtitle">…</p>` if a subtitle exists, else an empty string. |
 | `{{DATE_BLOCK}}` | `      <p class="date">…</p>` if a date exists, else an empty string. |
