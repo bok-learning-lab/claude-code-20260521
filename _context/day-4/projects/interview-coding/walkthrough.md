@@ -141,6 +141,41 @@ Run the demo sequence on the corpus: `/index-transcript` across all four transcr
 
 ---
 
+## Step 8 — Audit each Claude's return, clean up, run the demo end-to-end
+
+> Session 3 is done — can you check the work?
+> ...also from session 2 — still waiting on 1
+> ...Session 1 completed for this project. Can you now do final cleanup?
+
+**What happened:** the parallel sessions returned out of order — Session 3 first, then Session 2, then Session 1. For each return, the orchestrating Claude audited the work: read the SKILL.md, verified the examples against the source corpus, and spot-checked verbatim quotes and line numbers. Notable findings:
+
+- **Session 3 (`/methods-paragraph`):** clean. The SKILL.md's inspection pipeline correctly refuses to fabricate. The `examples/methods-paragraph-empty.md` was the right call given the other two sessions had not yet produced their outputs.
+- **Session 2 (`/find-negative-cases`):** mostly clean, with one verbatim issue. The R004 L34 quote in `examples/instrumental-mothers-emotional-framing.md` silently dropped the opening "It changes everything." sentence. Fixed by including the full opening. All other line references verified. The session's choice to add an explicit *scope-condition* step beyond what PLAN.md specified was a real improvement — without it, out-of-scope respondents would have inflated the negative-case count.
+- **Session 1 (`/index-transcript`):** clean. All four indexed transcripts pass the diff-cleanliness check (headers added, zero deletions). R003's `hopes-after-hs` recurrence correctly produces 8 headers; the other three transcripts have 7 each.
+
+After the audits, the orchestrating Claude promoted the skills' validated example outputs into the project's shared `output/` tree:
+
+- [output/indexed/](output/indexed/) — four indexed transcripts and four coverage reports
+- [output/negative-cases/](output/negative-cases/) — two audit memos for the two demo claims
+- [output/methods/methods-paragraph.md](output/methods/methods-paragraph.md) — generated against the now-populated state, replacing the empty-project version
+
+Relative paths inside the promoted files were rewritten because `output/<subdir>/` sits at a different depth than `.claude/skills/<name>/examples/`. The deferred `examples/methods-paragraph-full.md` — which Session 3 correctly declined to fabricate without real Stage 1 and 3 outputs — was generated against the populated state for the skill's own documentation.
+
+**The move worth noticing:** the audit step is not optional. The most common failure mode for parallel-built skills is plausible-looking output with small honesty bugs — paraphrase-as-quote, slightly wrong line numbers, fabricated detail. A short audit pass catches those before they reach a real reader. Session 3's refusal to fabricate without supporting inputs was the right call and saved the methods-paragraph from carrying invented detail. Trust but verify is the operating principle for parallel work.
+
+### What the project looks like after this step
+
+The interview-coding folder now contains the artifacts of a complete flexible-coding pipeline at small scale:
+
+- The corpus and protocol in [inputs/](inputs/).
+- Three working skills under [.claude/skills/](.claude/skills/) with their SKILL.md, supporting references, and worked examples.
+- A populated [output/](output/) tree showing the actual end-to-end run.
+- Project-level [CLAUDE.md](CLAUDE.md), [PLAN.md](PLAN.md), [claude-thoughts.md](claude-thoughts.md), and this [walkthrough.md](walkthrough.md).
+
+That sequence — index, audit, document — is the three-act demo: scaling, rigor, transparency. Each act is a direct response to one of Deterding & Waters' three main complaints about the field.
+
+---
+
 ## A note on prompting
 
 Each of the five prompts above is short. None of them tells Claude exactly what to write. They give it a goal, one or two alignment constraints (align with Mary's view; put it in a doc; make it parallelizable), and trust it to produce the artifact.

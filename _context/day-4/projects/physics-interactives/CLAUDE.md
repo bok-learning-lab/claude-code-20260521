@@ -7,6 +7,8 @@ This file gives Claude Code project-specific instructions when working inside th
 A self-contained bundle for making **PhET-style interactive simulations** — single-file HTML pages that a faculty member can build with Claude Code, double-click to open in Chrome, and share with students without any setup. The project ships with:
 
 - An essay explaining why this kind of artifact was historically out of reach for individual faculty, and why it isn't anymore: [essay-phet-tradition.md](essay-phet-tradition.md).
+- A companion essay placing PhET-style manipulable artifacts in the broader learning-sciences tradition (constructionism, conceptual change, embodied cognition, design-based research) and naming the adjacent disciplines the LLM inflection now opens up: [essay-manipulable-artifact.md](essay-manipulable-artifact.md).
+- A research-basis note summarizing the empirical literature (PhET design studies, Wieman/active-learning evidence) the skills are built on: [research-basis.md](research-basis.md).
 - A skill (`/phet-sim`) that runs a structured pedagogical interview before generating each simulation, plus rubrics and templates that keep quality high.
 - Worked examples a faculty member can adapt for their own course.
 
@@ -43,6 +45,8 @@ physics-interactives/
   CLAUDE.md                                — this file
   PLAN.md                                  — project plan; read first if iterating on the skill
   essay-phet-tradition.md                  — historical context for the design tradition
+  essay-manipulable-artifact.md            — companion essay: learning sciences + adjacent fields
+  research-basis.md                        — empirical research basis (PhET + Wieman/active learning)
 
   skill-draft/                             — working copy; promoted to .claude/skills/ in Phase 4
     SKILL.md                               — the /phet-sim skill (draft)
@@ -56,10 +60,13 @@ physics-interactives/
       single-file-linked-graph-sim.html    — canonical PhET layout: model + live graph
     examples/                              — worked examples (to be added in PLAN Phase 3)
 
-  .claude/skills/                          — promoted skills land here (PLAN Phase 4)
-    phet-sim/                              — primary skill
-    phet-critique/                         — sibling: review an existing .html
-    phet-port/                             — sibling: convert a static figure to an interactive
+  .claude/skills/                          — promoted skills land here
+    phet-sim/                              — author a new simulation (live)
+    phet-activity/                         — author classroom lesson plan around a sim (live)
+    phet-accessibility-audit/              — audit a sim against the accessibility floor (live)
+    phet-rationale/                        — department-facing rationale for a sim/activity (live)
+    phet-critique/                         — review an existing .html (planned)
+    phet-port/                             — convert a static figure to an interactive (planned)
 
   output/                                  — generated simulations land here when this project
                                              is opened standalone
@@ -67,9 +74,23 @@ physics-interactives/
 
 ## The skills
 
-- **`/phet-sim`** — author a new simulation from a learning goal. Runs a structured pedagogical interview (10 questions covering goal, learner, misconception, manipulables, hidden variables, representations, feedback, prompts, limitations, classroom use) *before* writing any code. Produces a single-file HTML that satisfies the output contract above. Self-scores against [skill-draft/rubrics/simulation-quality-rubric.md](skill-draft/rubrics/simulation-quality-rubric.md) and reports the score; refuses to declare a simulation done if it scores below 12/16 or scores 0 on any dimension.
+- **`/phet-sim`** — author a new simulation from a learning goal. Runs a structured pedagogical interview (10 questions covering goal, learner, misconception, manipulables, hidden variables, representations, feedback, prompts, limitations, classroom use) *before* writing any code. Produces a single-file HTML that satisfies the output contract above. Self-scores against [.claude/skills/phet-sim/rubrics/simulation-quality-rubric.md](.claude/skills/phet-sim/rubrics/simulation-quality-rubric.md) and reports the score; refuses to declare a simulation done if it scores below 12/16 or scores 0 on any dimension.
 
-  *Status:* draft at [skill-draft/SKILL.md](skill-draft/SKILL.md). Will be promoted to `.claude/skills/phet-sim/` once the worked examples in PLAN Phase 3 have exercised it.
+  *Status:* live at [.claude/skills/phet-sim/SKILL.md](.claude/skills/phet-sim/SKILL.md). Reference baseline still in `skill-draft/` until verified end-to-end.
+
+- **`/phet-activity`** — build a complete classroom lesson plan around an existing PhET-style sim, grounded in Carl Wieman's research on interactive engagement. Reads the sim's design record, gathers course context (level, modality, time budget, position in the course, assessment), then produces a single markdown lesson plan with the four-phase **Predict → Observe → Explain → Synthesize** structure, pre-class prep, follow-up assessment, and instructor facilitation notes (including expected wrong predictions). Refuses to ship a plan that fails any non-negotiable item on its [lesson-quality checklist](.claude/skills/phet-activity/rubrics/lesson-quality-checklist.md).
+
+  *Status:* live at [.claude/skills/phet-activity/SKILL.md](.claude/skills/phet-activity/SKILL.md). See also the research anchor at [.claude/skills/phet-activity/reference/wieman-pedagogy.md](.claude/skills/phet-activity/reference/wieman-pedagogy.md).
+
+  *Pairing:* `/phet-activity` is the natural pair to `/phet-sim`. A sim built without an activity is a screenshot; an activity without a sim is a worksheet. The two skills together produce the artifact + the scaffolding that turns the artifact into teaching.
+
+- **`/phet-accessibility-audit`** — audit a single-file simulation against the project's accessibility floor (keyboard operability, label coverage, contrast, color-only information, live-region density, motion handling). Produces a categorized markdown report with Blockers, Warnings, and Notes; gates "ready to share with students" on real measurements rather than instructor confidence. Replaces the v1 eyeball QC pass in `/phet-sim`'s final step.
+
+  *Status:* live at [.claude/skills/phet-accessibility-audit/SKILL.md](.claude/skills/phet-accessibility-audit/SKILL.md). Bundles its own [accessibility checklist](.claude/skills/phet-accessibility-audit/rubrics/accessibility-checklist.md); v2 ideas live in [skill-draft/accessibility-v2-ideas.md](skill-draft/accessibility-v2-ideas.md).
+
+- **`/phet-rationale`** — produce a 600–1,000-word department-facing rationale for a specific simulation and (optionally) its `/phet-activity` lesson plan. Reads the artifact's design record, draws on the project's Wieman/PhET research anchor and the project-level [research-basis.md](research-basis.md), and produces a markdown document suitable for a department chair, curriculum committee, dean, accreditation reviewer, or skeptical colleague. Refuses to fabricate citations; refuses to omit the "what we are not claiming" section.
+
+  *Status:* live at [.claude/skills/phet-rationale/SKILL.md](.claude/skills/phet-rationale/SKILL.md). Draws on `/phet-activity`'s [wieman-pedagogy reference](.claude/skills/phet-activity/reference/wieman-pedagogy.md) rather than duplicating it.
 
 - **`/phet-critique`** *(planned)* — score an existing `.html` against the rubric and accessibility checklist; produce a critique memo with a prioritized list of improvements.
 

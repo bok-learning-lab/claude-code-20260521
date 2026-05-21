@@ -15,10 +15,12 @@
       "Bash(curl -sL -o /Users/mk/Development/claude-code-20260521/_context/day-4/projects/texts-and-translation/early-modern-sanskrit/inputs/jagannatha-rasagangadhara.htm \"https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/5_poetry/1_alam/jgrasg1u.htm\")",
       "Bash(mkdir -p /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-accessibility-audit/rubrics)",
       "Bash(cp /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/skill-draft/phet-accessibility-audit/SKILL.md /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-accessibility-audit/SKILL.md)",
-      "Bash(cp /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/skill-draft/rubrics/accessibility-checklist.md /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-accessibility-audit/rubrics/accessibility-checklist.md)"
+      "Bash(cp /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/skill-draft/rubrics/accessibility-checklist.md /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-accessibility-audit/rubrics/accessibility-checklist.md)",
+      "Bash(mkdir -p /Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-rationale/templates)"
     ],
     "additionalDirectories": [
-      "/Users/mk/Development/claude-code-20260521/_context/day-4/projects/interview-coding/.claude/skills/index-transcript"
+      "/Users/mk/Development/claude-code-20260521/_context/day-4/projects/interview-coding/.claude/skills/index-transcript",
+      "/Users/mk/Development/claude-code-20260521/_context/day-4/projects/physics-interactives/.claude/skills/phet-rationale"
     ]
   }
 }

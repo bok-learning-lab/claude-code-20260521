@@ -139,17 +139,29 @@ Each failure mode discovered → an explicit line added to the skill's QC checkl
 
 ### Step 4.1 — Promote `/phet-sim` to the project's `.claude/skills/`
 
-Move the contents of `skill-draft/` to `.claude/skills/phet-sim/` (project-local). Verify the skill is invokable from a fresh Claude Code session opened directly in `physics-interactives/` and that the frontmatter description triggers correctly on relevant prompts (e.g. "help me make an interactive diagram about X"). Fix the relative paths inside [SKILL.md](skill-draft/SKILL.md) — references to `../essay-phet-tradition.md` and the rubric/template files will need to be re-pointed once the skill moves three directories deeper. Once verified, optionally copy to the repo-root `.claude/skills/phet-sim/` so other workshop projects can invoke it too.
+- [x] Copied `skill-draft/SKILL.md`, `rubrics/`, and `templates/` to `.claude/skills/phet-sim/`. Essay link inside SKILL.md re-pointed from `../essay-phet-tradition.md` to `../../../essay-phet-tradition.md`.
+- [ ] Verify the skill is invokable from a fresh Claude Code session opened directly in `physics-interactives/` and that the frontmatter description triggers correctly on relevant prompts ("help me make an interactive diagram about X").
+- [ ] Once verified, delete `skill-draft/` and update PLAN.md / CLAUDE.md references in a single cleanup pass.
+- [ ] Optionally copy the verified skill to the repo-root `.claude/skills/phet-sim/` so other workshop projects can invoke it too.
 
-### Step 4.2 — Draft `/phet-critique`
+### Step 4.2 — Build `/phet-activity` (companion skill for classroom use)
+
+The natural pair to `/phet-sim`. Wieman's research is clear that PhET sims produce conceptual gains *only when wrapped in interactive engagement activities* — surfacing prior beliefs, committing to a prediction, peer discussion, instructor synthesis. `/phet-activity` takes an existing sim (or its design record) and a few classroom context inputs (course, modality, time budget) and produces a single markdown lesson plan that bakes in the Predict-Observe-Explain-Synthesize structure.
+
+- [x] Built directly at `.claude/skills/phet-activity/` (no skill-draft intermediate stage — the convention from Step 4.1 is established).
+- [x] Ships with [reference/wieman-pedagogy.md](.claude/skills/phet-activity/reference/wieman-pedagogy.md) (research anchor), [templates/lesson-plan-template.md](.claude/skills/phet-activity/templates/lesson-plan-template.md), and [rubrics/lesson-quality-checklist.md](.claude/skills/phet-activity/rubrics/lesson-quality-checklist.md).
+- [ ] Test against the damped-harmonic-oscillator sim built in Step 3 — does the generated lesson plan name plausible wrong predictions for the "more damping = faster settling" misconception?
+- [ ] Once verified, add at least one worked example (a generated lesson plan) under `.claude/skills/phet-activity/examples/`.
+
+### Step 4.3 — Draft `/phet-critique`
 
 Sibling skill that takes an existing `.html` file and scores it against [rubrics/simulation-quality-rubric.md](skill-draft/rubrics/simulation-quality-rubric.md). Output is a critique memo plus a prioritized list of improvements. Lives at `.claude/skills/phet-critique/` (project-local).
 
-### Step 4.3 — Draft `/phet-port`
+### Step 4.4 — Draft `/phet-port`
 
 Sibling skill that takes a static figure, description, or equation and proposes the manipulable/fixed/linked-representation decomposition, then builds the interactive. The on-ramp skill for faculty who arrive with a textbook diagram in mind. Lives at `.claude/skills/phet-port/` (project-local).
 
-### Step 4.4 — Workshop session prep
+### Step 4.5 — Workshop session prep
 
 - Pick which two of the four examples ship visibly in the workshop demo (probably one STEM + one humanities, to make the lineage point and the new-affordance point in the same session).
 - Write a short workshop facilitator note for this project (where it lives in the day-4 arc, what the demo flow is, what faculty leave with).
@@ -190,8 +202,13 @@ _context/day-4/projects/physics-interactives/
   .claude/
     skills/
       phet-sim/                           (promoted from skill-draft/ in Step 4.1)
-      phet-critique/                      (drafted in Step 4.2)
-      phet-port/                          (drafted in Step 4.3)
+      phet-activity/                      (built in Step 4.2 — classroom lesson plans around sims)
+        SKILL.md
+        reference/wieman-pedagogy.md
+        templates/lesson-plan-template.md
+        rubrics/lesson-quality-checklist.md
+      phet-critique/                      (drafted in Step 4.3)
+      phet-port/                          (drafted in Step 4.4)
 ```
 
 Optionally, after the skills are verified working in the project-local `.claude/`, they can also be copied up to the repo-root `.claude/skills/` so they're invokable from any session opened anywhere in the workshop repo. The project-local copy remains the source of truth.

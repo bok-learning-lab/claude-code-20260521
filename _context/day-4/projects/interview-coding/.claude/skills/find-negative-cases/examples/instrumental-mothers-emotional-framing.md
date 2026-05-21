@@ -23,7 +23,7 @@ The claim is about *instrumental mothers* — respondents whose underlying reaso
 
 > "College means a different life. It means your kids don't worry about lights getting cut off. It means you can take your mom to dinner. It means if somebody gets sick, you don't have to choose between the prescription and the rent. College is — it's the thing that breaks the cycle. That's what it is. That is what it is for us." — [R004 L46](../../../../inputs/transcripts/R004-Transcript.md#L46)
 
-> "It changes everything to have one person in the family who has a real career. Because then everybody else has — has a floor under them. Like, if I lose my job tomorrow, I can call Terrance. I don't *want* to call Terrance, but I can. My mom doesn't worry about her bills anymore. That is what one degree did for us." — [R004 L34](../../../../inputs/transcripts/R004-Transcript.md#L34)
+> "It changes everything. It changes everything to have one person in the family who has a real career. Because then everybody else has — has a floor under them. Like, if I lose my job tomorrow, I can call Terrance. I don't *want* to call Terrance, but I can. My mom doesn't worry about her bills anymore. That is what one degree did for us." — [R004 L34](../../../../inputs/transcripts/R004-Transcript.md#L34)
 
 > "Andre is going to be the next Terrance. That's the plan. That's been the plan since he was small." — [R004 L38](../../../../inputs/transcripts/R004-Transcript.md#L38)
 

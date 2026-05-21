@@ -7,7 +7,7 @@ description: Audit a single-file PhET-style HTML simulation for accessibility ag
 
 ## Purpose
 
-Measure a single-file HTML simulation against the accessibility expectations of the `physics-interactives` project — both the v1 floor (`../rubrics/accessibility-checklist.md`) and the v2 ideas (`../accessibility-v2-ideas.md`).
+Measure a single-file HTML simulation against the accessibility expectations of the `physics-interactives` project — both the v1 floor (`rubrics/accessibility-checklist.md`, bundled with this skill) and the v2 ideas (`../../../skill-draft/accessibility-v2-ideas.md` at the project root, where the v2 roadmap lives).
 
 This skill's contribution is **moving the QC pass from eyeball-checked to measured**. The author of `/phet-sim` runs the floor checklist by reading the file. This skill runs it by reasoning about specific properties of the file with deterministic helpers where possible (contrast ratios, label coverage, `aria-live` density) and LLM judgment where heuristic (color-only information, prose reading level).
 
@@ -153,13 +153,13 @@ Anything that requires *understanding the simulation* (color-only information, c
 
 ## Resources used by this skill
 
-- `../rubrics/accessibility-checklist.md` — the v1 floor.
-- `../accessibility-v2-ideas.md` — the v2 ambition; informs which Notes to surface.
-- `../rubrics/simulation-quality-rubric.md` — only the row about accessible labels is relevant here; the rest is the domain of `/phet-critique`.
+- `rubrics/accessibility-checklist.md` — the v1 floor (bundled).
+- `../../../skill-draft/accessibility-v2-ideas.md` — the v2 ambition at the project root; informs which Notes to surface.
+- `../phet-sim/rubrics/simulation-quality-rubric.md` — only the row about accessible labels is relevant here; the rest is the domain of `/phet-critique`.
 
 ## Notes for the skill author (i.e., us)
 
 - The temptation will be to expand this skill into a general accessibility linter. Resist. Its value is in being tightly tuned to the shape of artifacts this project produces.
 - The contrast computation should be done from the source CSS, not by guessing. If a CSS variable is overridden in a media query (`prefers-color-scheme: dark`), audit both branches.
 - For the `aria-live` density check, the deciding question is *how often the text inside the live region actually changes*, not just how often the surrounding code runs. A render function that writes the same value every frame won't actually trigger announcements in most screen readers — but relying on that is fragile. Recommend throttling regardless.
-- When this skill is promoted to `.claude/skills/phet-accessibility-audit/`, update the `Resources used by this skill` paths.
+- This is the promoted copy in `.claude/skills/phet-accessibility-audit/`. The draft at `skill-draft/phet-accessibility-audit/SKILL.md` is the source of truth for design iteration; keep changes flowing draft → promoted, not the other way.
