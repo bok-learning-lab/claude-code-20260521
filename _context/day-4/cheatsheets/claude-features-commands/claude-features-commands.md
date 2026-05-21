@@ -1,7 +1,5 @@
 # Claude Code: Features and Commands
 
-Claude Code is more than a chat window — it is a system with distinct features that each do a different kind of work. Understanding what those features are (and how to reach them) is what separates users who feel like they are fighting the tool from users who feel like they are extending it.
-
 **The core features of Claude Code:**
 
 - **The model itself** — the AI that reads your prompts, reasons about them, and generates responses. This is what you are talking to directly.
