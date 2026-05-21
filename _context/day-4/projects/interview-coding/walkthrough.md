@@ -131,6 +131,16 @@ Run the demo sequence on the corpus: `/index-transcript` across all four transcr
 
 ---
 
+## Step 7 — Make this folder a project with its own CLAUDE.md
+
+> I think we should build the skills in a `.claude/skills` folder inside `interview-coding`, and we'll get people to open that up as a project. So let's also create a CLAUDE.md file for that project that sketches out what it's about.
+
+**What happened:** Claude wrote a project-level [CLAUDE.md](CLAUDE.md) that loads automatically when Claude Code is started with this folder as the working directory. It points new participants at the right reading order, names the hard constraints (no "discovering themes," no line-by-line open coding, don't replace the immersive first read), and clarifies that skills built in `.claude/skills/<skill-name>/` resolve under this folder — so the skills travel with the project when shared.
+
+**The move worth noticing:** project-scoped `CLAUDE.md` and project-scoped `.claude/skills/` together turn this folder into a portable, self-explaining workshop unit. A participant who clones just this folder gets the corpus, the brainstorm, the plan, the skills, and the alignment constraints all in one bundle — no need to ship the rest of the workshop repo with them. The CLAUDE.md is what makes the project *self-introducing* to any Claude session that opens it.
+
+---
+
 ## A note on prompting
 
 Each of the five prompts above is short. None of them tells Claude exactly what to write. They give it a goal, one or two alignment constraints (align with Mary's view; put it in a doc; make it parallelizable), and trust it to produce the artifact.

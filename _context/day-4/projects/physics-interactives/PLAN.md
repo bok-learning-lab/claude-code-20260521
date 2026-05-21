@@ -2,80 +2,196 @@
 
 A workshop project that pairs a short historical essay with a Claude Code skill (and supporting resources) that helps faculty build PhET-inspired interactive diagrams as single, locally-runnable HTML files.
 
-## Why this project
+## Why this project (one paragraph)
 
-Faculty in the workshop have all seen PhET simulations in their own teaching, but most of them assume "interactives like that" are out of reach without a software team. They are not, anymore. The collapse in cost between idea and prototype is the central pedagogical point of this project — and it only lands if the artifacts Claude produces are genuinely good, not just shiny.
+Faculty in the workshop have all seen PhET simulations in their own teaching, but most assume "interactives like that" are out of reach without a software team. They are not, anymore. The collapse in cost between idea and prototype is the central pedagogical point of this project — and it only lands if the artifacts Claude produces are genuinely good, not just shiny. The essay justifies the skill; the skill is the payoff.
 
-So the project has two halves:
+Background reading before doing any step below:
 
-1. **An essay** ([essay-phet-tradition.md](essay-phet-tradition.md)) that situates PhET in its own history — what these simulations were, what they cost to build, why they worked pedagogically — and explains why faculty-authored interactives are newly possible.
-2. **A skill** ([skill-draft/SKILL.md](skill-draft/SKILL.md)) that encodes PhET's design discipline so Claude Code does not just make "flashy interactive things." The skill's purpose is to keep the pedagogical bar high while the technical bar is low.
+1. [essay-phet-tradition.md](essay-phet-tradition.md) — historical context and the design tradition we are inheriting.
+2. [skill-draft/SKILL.md](skill-draft/SKILL.md) — the current draft of the flagship skill, including the hard output contract and the pedagogical interview.
 
-The essay justifies the skill. The skill is the payoff.
+## Output contract (read once, apply forever)
 
-## Hard output contract for the skill
+Every artifact this skill produces must satisfy these properties. Most of the plan below exists to enforce them.
 
-Faculty must be able to **double-click a file and have it run in Chrome.** That constraint is the whole point — it makes the artifact portable (emailable, attachable, Canvas-uploadable, archivable) and removes every dependency that has ever broken faculty workflows in the past.
+- Single `.html` file, opens by double-click in Chrome from `file://`.
+- No React, Next.js, Vite, npm install, or build step.
+- No runtime data fetches (`fetch`, `XMLHttpRequest`, asset loads).
+- External CSS via `<link>` allowed. External JS via CDN allowed but discouraged and must be marked.
+- No emojis anywhere.
+- Header comment captures the pedagogical design record (learning goal, learner, misconception, manipulables, hidden variables, representations, prompts, limitations, classroom use).
 
-Specifically:
+## Phase 1 — Foundations
 
-- **Single `.html` file.** No React, no Next.js, no Vite, no build step, no `npm install`.
-- **Runs from `file://` in Chrome.** No local server. No `python -m http.server`.
-- **No runtime data fetches.** No JSON, CSV, or asset loading at runtime. Everything the simulation needs is embedded.
-- **External CSS via `<link>` is allowed.** Faculty may want to swap in a stylesheet, and CSS does not break the file:// model.
-- **External JS via CDN is allowed but discouraged.** If used, the file should still degrade gracefully or be clearly marked as internet-dependent.
-- **No emojis** in generated files (per repo convention).
+The skill's quality depends entirely on the rubric and worksheet documents that back it. Build those before building examples.
 
-## What the skill must protect against
+### Step 1.1 — Finalize the essay
 
-A faculty member with Claude Code can produce a screen full of sliders and animated particles in five minutes. That is the failure mode, not the goal. The skill's job is to insist on the harder PhET lessons before any code is written:
+- [x] First draft written ([essay-phet-tradition.md](essay-phet-tradition.md)).
+- [x] Spurious "160 hours design / 500+ dev / 40 testing" figure removed; footnote replaced with the verifiable PhET Simulation Design Process source.
+- [ ] Marlon read-through pass for voice and length. Target ~1,200–1,500 words for workshop attendees.
+- [ ] Decide whether to add a closing paragraph explicitly cross-referencing the skill, or keep the essay standalone and link from the project README.
 
-- Start from the misconception, not the topic.
-- Constrain the world deliberately — simplification is the pedagogical move.
-- Make the invisible visible.
-- Link at least two representations (model, graph, equation, table).
-- Show causality immediately and reversibly.
-- State the model's limitations as part of the artifact.
+### Step 1.2 — Draft `rubrics/simulation-quality-rubric.md`
 
-See the skill draft for the full pedagogical contract.
+The scoring rubric used by the final QC pass of `/phet-sim` and by the future `/phet-critique` skill. Should score along eight dimensions, each with concrete observable criteria (not vibes):
 
-## Skills to build (in order)
+- Conceptual clarity — is the learning goal recoverable from the artifact alone?
+- Interactivity — is every visible value traceable to a control?
+- Visual legibility — projector-readable, labelled, no decorative motion.
+- Feedback quality — immediate, reversible, linked representations update together.
+- Accessibility — keyboard, labels, contrast (subset checklist lives separately).
+- Local portability — runs from `file://`, no fetches, no console errors.
+- Code maintainability — readable to another instructor six months from now.
+- Disciplinary honesty — model limitations stated in the artifact.
 
-### 1. `/phet-sim` — author a new simulation from a learning goal
+Each dimension gets a 0/1/2 scoring rule and at least one example of what each level looks like.
 
-The flagship skill. Drafted in [skill-draft/SKILL.md](skill-draft/SKILL.md). Walks the faculty member through learning-goal articulation first, then produces a single-file HTML simulation that satisfies both the technical and pedagogical contracts.
+### Step 1.3 — Draft `rubrics/accessibility-checklist.md`
 
-**Build location (when promoted):** `.claude/skills/phet-sim/`.
+The accessibility floor — a focused checklist invoked by the skill's QC pass and exposed to faculty as a separate doc they can apply manually.
 
-### 2. `/phet-critique` — review an existing single-file simulation (planned)
+- Every control has a `<label for="...">` or `aria-label`.
+- Sliders operable by keyboard (arrow keys, page up/down, home/end).
+- Color is never the only carrier of information.
+- Body text minimum 16px; viewport labels larger.
+- Contrast ratios meet WCAG AA for body text against background.
+- No reliance on hover-only affordances (mobile + projector parity).
+- Resize behavior at 1024px width; no horizontal scroll required.
 
-Given an HTML file, score it against the simulation quality rubric: conceptual clarity, interactivity, visual legibility, feedback quality, accessibility, local portability, code maintainability, disciplinary honesty. Output is a critique memo plus a prioritized list of improvements. This is the skill faculty use on their own drafts (or on each other's) before sharing with students.
+### Step 1.4 — Draft `rubrics/pedagogical-design-worksheet.md`
 
-**Build location (when promoted):** `.claude/skills/phet-critique/`.
+The long-form, paper-friendly version of the pedagogical interview from [skill-draft/SKILL.md](skill-draft/SKILL.md). Same ten questions, but with prompts, examples, and space for faculty to think on paper before invoking the skill. Doubles as a handout for the workshop session itself.
 
-### 3. `/phet-port` — convert a static figure or textbook diagram into an interactive (planned)
+**Phase 1 done when:** all three rubric/worksheet docs exist, the essay has had a voice pass, and the four documents read as a coherent set.
 
-Given a static image, a description, or an equation, propose what would become manipulable, what would stay fixed, and which linked representations would best teach the concept. Then build it. Most faculty come to this project with a static figure in mind; this skill is the on-ramp.
+## Phase 2 — Templates
 
-**Build location (when promoted):** `.claude/skills/phet-port/`.
+Three minimal HTML starters that the skill can use as scaffolds. Each must satisfy the output contract on its own, before any topic-specific code is added.
 
-## Supporting resources (to be drafted alongside the skill)
+### Step 2.1 — `templates/single-file-svg-sim.html`
 
-Under `skill-draft/`:
+The default starter. SVG viewport for the model, DOM panel for controls and "Try this" / "Model limitations" prompts. Includes:
 
-- `rubrics/simulation-quality-rubric.md` — the scoring rubric used by `/phet-critique` and by the final QC step of `/phet-sim`.
-- `rubrics/accessibility-checklist.md` — keyboard navigation, labels, color contrast, projector legibility.
-- `rubrics/pedagogical-design-worksheet.md` — the learning-goal-first worksheet `/phet-sim` walks faculty through.
-- `templates/single-file-svg-sim.html` — minimal SVG-based starter (good for diagrams, draggable objects, crisp labels).
-- `templates/single-file-canvas-sim.html` — minimal Canvas starter (good for particles, fields, fluids, many moving objects).
-- `templates/single-file-linked-graph-sim.html` — model + live graph + readout, the canonical PhET layout.
-- `examples/` — at least three worked examples spanning STEM and humanities (e.g. projectile motion, SIR epidemiology, rhetorical feedback loop, attention-window visualizer). Examples double as evidence the skill works and as starting points for faculty to adapt.
+- One slider with live numeric readout.
+- One draggable SVG element.
+- Reset button.
+- Header comment with placeholders for the pedagogical design record.
+- Embedded `<style>` and `<script>` blocks, no external dependencies.
 
-## Open questions
+### Step 2.2 — `templates/single-file-canvas-sim.html`
 
-- **Which examples should ship with the skill?** The STEM examples sell the legitimacy of the lineage. The humanities/social-science examples sell the new possibility. Probably two of each.
-- **How aggressive should the skill be about insisting on the learning-goal-first workflow?** Faculty in a workshop setting will want fast gratification. There is a real tension between "produces something in 90 seconds" and "produces something good."
-- **Accessibility floor.** What is the minimum we enforce vs. recommend? Keyboard-operable sliders are non-negotiable; full ARIA labeling on SVG is harder to guarantee in a single-file artifact.
-- **Offline-first vs. CDN-allowed.** Workshop rooms have wifi but conferences and classrooms often don't. Default should probably be fully self-contained, with CDN as an opt-in.
+For particle systems, fields, fluids — anything where rendering many moving objects per frame matters. Same scaffolding as 2.1 but with a `<canvas>` viewport and a basic requestAnimationFrame render loop.
 
-These are good questions to settle alongside the first draft, not before it.
+### Step 2.3 — `templates/single-file-linked-graph-sim.html`
+
+The canonical PhET layout: model viewport on the left, live graph on the right, both wired to the same state. This is the most common shape; building it once as a template saves work on every example.
+
+**Phase 2 done when:** all three templates open from `file://`, pass the accessibility checklist for their scaffolding (not their content), and serve as drop-in starters for Phase 3.
+
+## Phase 3 — Worked examples + skill iteration
+
+This is where the skill gets tested against itself. Each example is built by *invoking the skill draft* on a learning goal, not by writing the HTML directly. The point is to find the skill's failure modes early.
+
+### Step 3.1 — Example 1: projectile motion (STEM, canonical lineage)
+
+The canonical PhET topic. Establishes that the skill can produce a recognizably PhET-tradition artifact. Targets an intro physics audience. Manipulables: launch angle, initial velocity, gravity. Linked representations: physical trajectory + height-vs-time graph + range readout. Hidden by design: air resistance.
+
+Acceptance: a physics-teaching colleague (not Marlon) opens the file, recognizes the lineage, and would consider using it in a lecture.
+
+### Step 3.2 — Example 2: SIR epidemiology (STEM, current relevance)
+
+S/I/R compartmental model with sliders for transmission rate, recovery rate, and initial infected count. Linked: agent-grid view + S/I/R curves over time + R0 readout. Hidden: demographic structure, vaccination, behavior change. Limitations panel explicitly names what this model can and cannot say about real epidemics.
+
+Acceptance: an instructor in public health or biostatistics finds the limitations panel honest.
+
+### Step 3.3 — Example 3: rhetorical feedback loop (humanities, new affordance)
+
+A small model of how a rhetorical move (e.g. a concession, an appeal, a hedge) shifts audience uptake, which feeds back into the speaker's next move. Manipulables: speaker stance, hedging level, audience prior. Linked: dialogue panel + uptake meter + cumulative-trust line. Hidden by design: identity, register, prior history beyond the simulation window.
+
+Acceptance: a writing or rhetoric colleague finds it pedagogically useful for a single class session on audience modeling.
+
+### Step 3.4 — Example 4: attention-window visualizer (CS / AI explainer)
+
+Visualizes how a transformer-style attention window over a sequence of tokens shifts as the window grows or shrinks. Manipulables: context length, attention temperature, position of cursor. Linked: token grid + attention-weights heatmap + "what the model 'sees'" readout. Hidden: actual model weights — this is a pedagogical model of attention, not a working LLM.
+
+Acceptance: a non-CS faculty member who has heard "context window" but never seen one comes away with an accurate mental model.
+
+### Step 3.5 — Iterate the skill against the examples
+
+After each example, log what the skill did badly. Common predicted failure modes:
+
+- Skipped the pedagogical interview or asked the questions too superficially.
+- Used a CDN library when it didn't need to.
+- Generated `fetch()` calls.
+- Forgot to wire reset.
+- Forgot the "Model limitations" panel.
+- Put accessibility labels in inline comments instead of `aria-label` attributes.
+
+Each failure mode discovered → an explicit line added to the skill's QC checklist or pedagogical contract.
+
+**Phase 3 done when:** all four examples exist under `skill-draft/examples/`, each opens from `file://` with zero console errors, and the skill draft has been revised at least once based on what the examples surfaced.
+
+## Phase 4 — Promotion + sibling skills
+
+**Skill location convention:** all three skills live under this project's own `.claude/skills/` directory — i.e. `_context/day-4/projects/physics-interactives/.claude/skills/<name>/`. The reason is that for the workshop demo, Claude Code is opened *inside* the `physics-interactives/` folder, and the project needs to be a standalone bundle a physics faculty member can grab and run on their own machine without dragging the rest of the repo along. Once each skill is working, it can also be copied to the repo-root `.claude/skills/` so it's available across the whole workshop — but the project-local copy is the source of truth.
+
+### Step 4.1 — Promote `/phet-sim` to the project's `.claude/skills/`
+
+Move the contents of `skill-draft/` to `.claude/skills/phet-sim/` (project-local). Verify the skill is invokable from a fresh Claude Code session opened directly in `physics-interactives/` and that the frontmatter description triggers correctly on relevant prompts (e.g. "help me make an interactive diagram about X"). Fix the relative paths inside [SKILL.md](skill-draft/SKILL.md) — references to `../essay-phet-tradition.md` and the rubric/template files will need to be re-pointed once the skill moves three directories deeper. Once verified, optionally copy to the repo-root `.claude/skills/phet-sim/` so other workshop projects can invoke it too.
+
+### Step 4.2 — Draft `/phet-critique`
+
+Sibling skill that takes an existing `.html` file and scores it against [rubrics/simulation-quality-rubric.md](skill-draft/rubrics/simulation-quality-rubric.md). Output is a critique memo plus a prioritized list of improvements. Lives at `.claude/skills/phet-critique/` (project-local).
+
+### Step 4.3 — Draft `/phet-port`
+
+Sibling skill that takes a static figure, description, or equation and proposes the manipulable/fixed/linked-representation decomposition, then builds the interactive. The on-ramp skill for faculty who arrive with a textbook diagram in mind. Lives at `.claude/skills/phet-port/` (project-local).
+
+### Step 4.4 — Workshop session prep
+
+- Pick which two of the four examples ship visibly in the workshop demo (probably one STEM + one humanities, to make the lineage point and the new-affordance point in the same session).
+- Write a short workshop facilitator note for this project (where it lives in the day-4 arc, what the demo flow is, what faculty leave with).
+- Decide whether `pedagogical-design-worksheet.md` should be a printed handout for the in-person session.
+
+## Open questions to resolve before workshop
+
+These were noted in the previous draft of this PLAN. They are still open and should be settled by the end of Phase 1 or early Phase 3, not before:
+
+- **Which examples ship with the skill?** STEM legitimizes the lineage; humanities/social science sells the new possibility. Probably two of each. The Phase 3 examples are sized so we can pick two finalists later.
+- **How aggressive should the pedagogical interview be?** Real tension between "produces something in 90 seconds" (workshop gratification) and "produces something good" (skill's purpose). Phase 3 testing will give us a defensible default.
+- **Accessibility floor — minimum we enforce vs. recommend.** Keyboard-operable sliders are non-negotiable; full ARIA labeling on dynamic SVG is harder to guarantee in a single-file artifact. Set the line in Step 1.3.
+- **Offline-first vs. CDN-allowed default.** Workshop wifi is fine; classroom wifi often is not. Lean toward fully self-contained as the default and CDN as opt-in. Confirm in Step 1.2 / Step 2.1.
+
+## File map (target state at end of Phase 4)
+
+The whole project is self-contained under `physics-interactives/` so a physics faculty member can grab the folder and run it on their own machine. The skills live in the project's *own* `.claude/skills/` directory — not the repo root.
+
+```text
+_context/day-4/projects/physics-interactives/
+  PLAN.md                                 (this file)
+  essay-phet-tradition.md
+  skill-draft/                            (working copy; promoted to .claude/skills/ in Step 4.1)
+    SKILL.md
+    rubrics/
+      simulation-quality-rubric.md
+      accessibility-checklist.md
+      pedagogical-design-worksheet.md
+    templates/
+      single-file-svg-sim.html
+      single-file-canvas-sim.html
+      single-file-linked-graph-sim.html
+    examples/
+      projectile-motion.html
+      sir-epidemiology.html
+      rhetorical-feedback-loop.html
+      attention-window.html
+  .claude/
+    skills/
+      phet-sim/                           (promoted from skill-draft/ in Step 4.1)
+      phet-critique/                      (drafted in Step 4.2)
+      phet-port/                          (drafted in Step 4.3)
+```
+
+Optionally, after the skills are verified working in the project-local `.claude/`, they can also be copied up to the repo-root `.claude/skills/` so they're invokable from any session opened anywhere in the workshop repo. The project-local copy remains the source of truth.
