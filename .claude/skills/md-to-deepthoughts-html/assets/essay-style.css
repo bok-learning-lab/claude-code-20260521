@@ -208,6 +208,16 @@ body {
   font-weight: 600;
 }
 
+.footnotes {
+  font-size: 16px;
+  opacity: 0.85;
+  margin-top: 32px;
+}
+
+.footnotes li {
+  margin-bottom: 6px;
+}
+
 /* Mobile */
 @media (max-width: 860px) {
   .essay-layout {
