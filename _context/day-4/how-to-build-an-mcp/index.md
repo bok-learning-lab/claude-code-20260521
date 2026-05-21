@@ -1,4 +1,4 @@
-# How this MCP got built
+# How to build an MCP
 
 A worked example: building a small Python MCP server that wraps a public API,
 using Claude Code and the `/mcp-builder` skill. The target was the
