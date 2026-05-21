@@ -8,6 +8,14 @@
       "env": {
         "REPLICATE_API_TOKEN": "r8_REPLACE_WITH_YOUR_TOKEN"
       }
+    },
+    "Canvas": {
+      "type": "http",
+      "url": "https://canvas-mcp.ai.huit.harvard.edu/mcp",
+      "headers": {
+        "X-Canvas-API-Token": "YOUR_CANVAS_API_TOKEN",
+        "X-Canvas-API-URL": "https://harvard.beta.instructure.com"
+      }
     }
   }
 }
