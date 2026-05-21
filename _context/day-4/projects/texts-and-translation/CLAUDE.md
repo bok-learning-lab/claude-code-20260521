@@ -13,7 +13,16 @@ Faculty open Claude Code with this folder as the working directory. Skills built
 
 ## Status
 
-**This is initial scaffolding.** CLAUDE.md and PLAN.md exist; no skills have been built yet. The corpora are in place. See [PLAN.md](PLAN.md) for candidate skills, parallel-build tasks, and open questions.
+Four skills are built and ready. The Homeric Greek source is in place. See [PLAN.md](PLAN.md) for the full candidate list and open questions.
+
+| Skill | File | What it does |
+|---|---|---|
+| `/split-into-books` | [.claude/skills/split-into-books/SKILL.md](.claude/skills/split-into-books/SKILL.md) | Splits translation files into 24 per-book files for fast passage queries |
+| `/show-passage` | [.claude/skills/show-passage/SKILL.md](.claude/skills/show-passage/SKILL.md) | Displays a passage with original Homeric Greek at top and chosen translations below |
+| `/identify-figures-sanskrit` | [.claude/skills/identify-figures-sanskrit/SKILL.md](.claude/skills/identify-figures-sanskrit/SKILL.md) | Identifies candidate alaṃkāras in a passage from the *Rasagaṅgādhara* |
+| `/identify-figures-greek` | [.claude/skills/identify-figures-greek/SKILL.md](.claude/skills/identify-figures-greek/SKILL.md) | Identifies rhetorical figures in a passage of Homeric Greek |
+
+Run `/split-into-books all` once before using `/show-passage` — it pre-splits translation files into per-book files that make passage extraction fast.
 
 ## Audience modes
 
@@ -28,9 +37,12 @@ If unsure which mode applies, ask one question to disambiguate.
 
 ### The Odyssey
 
-The richer of the two at this stage. Single Greek source ([the_odyssey.txt](the-odyssey/the_odyssey.txt), Polylas's 19th-century translation into Modern Greek) plus 14 translations into other languages under [the-odyssey/translations/](the-odyssey/translations/). This is the corpus to demo *comparative translation* skills: handing a passage to Claude with five translations and asking what each translator chose to preserve and what they let go.
+One original and 14 translations, all in `the-odyssey/inputs/`:
 
-The Greek source here is itself a translation (Polylas, Modern Greek), not the original Homeric Greek. If a demo needs the Homeric original specifically, source it separately (Project Gutenberg #1727 has Murray's Loeb).
+- [the-odyssey/inputs/odyssey_homeric_greek.xml](the-odyssey/inputs/odyssey_homeric_greek.xml) — **the primary source for skills**. Original Homeric Greek in TEI/XML format (PerseusDL, Murray edition, tlg0012.tlg002.perseus-grc2). Book structure encoded as `<div type="book" n="N">`, lines as `<l n="N">`. This is what `/show-passage` and `/identify-figures-greek` read.
+- [the-odyssey/inputs/translations/](the-odyssey/inputs/translations/) — 14 translations across 6 languages, including Polylas's 19th-century Modern Greek (`odyssey_greek_Iakovos_Polylas.txt`). See the skills for the full file map.
+
+This corpus is designed to demo `/show-passage`: original Greek at the top, selected translations below, showing what each translator chose to preserve or let go.
 
 ### Early modern Sanskrit (Rasagaṅgādhara)
 
@@ -41,10 +53,10 @@ Source: GRETIL (Göttingen Register of Electronic Texts in Indian Languages), ed
 ## Conventions
 
 - **Skills live in `.claude/skills/<skill-name>/`** — project-scoped, so they travel with this folder.
-- **Source texts are read-only.** Don't modify files in `the-odyssey/translations/` or `early-modern-sanskrit/inputs/`. Generated artifacts go in `output/`.
+- **Source texts are read-only.** Don't modify files in `the-odyssey/inputs/` or `early-modern-sanskrit/inputs/`. Generated artifacts go in the sub-project's own `output/` folder (`the-odyssey/skill_output/` or `early-modern-sanskrit/skill_output/`).
 - **Preserve script and diacritics exactly.** Do not silently transliterate, romanize, or strip diacritics from source text. If a transformation is needed, produce a separate file and label it explicitly (e.g. `passage-iast.txt`).
 - **No emojis** in any file. Workshop-wide convention.
-- **Markdown link syntax** for file references — `[Pope](the-odyssey/translations/odyssey_pope.txt)`.
+- **Markdown link syntax** for file references — `[Pope](the-odyssey/inputs/translations/odyssey_pope.txt)`.
 - **Cite by edition and line/verse, not by file line number.** A passage exists at *Odyssey* 1.1–10 across every translation; that citation should be primary, with file paths secondary.
 
 ## Alignment with humanistic practice
@@ -59,6 +71,5 @@ Workshop participants in this project are likely to be skeptical of LLM-assisted
 
 ## Open questions (carried in PLAN.md)
 
-- Should the Homeric Greek original (Loeb / Murray) be added alongside Polylas?
 - Should more of the *Rasagaṅgādhara* (Ānanas 2–4) be downloaded from GRETIL?
 - Should published English translations of the *Rasagaṅgādhara* be added for a comparative-translation pass on a Sanskrit primary?
